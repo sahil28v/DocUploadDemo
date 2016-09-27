@@ -2,6 +2,7 @@
 
 exports.add = (req,res) => {
 	var file = req.file
-	console.log("File: "+ file.mimetype)
+	console.log(req.body)
+	console.log(file)
 	res.status(200).end()
 }
