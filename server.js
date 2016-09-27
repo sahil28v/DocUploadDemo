@@ -11,7 +11,16 @@ const corsOptions = {
 	credentials: true
 }
 const app = express()
-const upload = multer({ dest: 'uploads/' });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.pdf') //Appending .jpg
+  }
+})
+
+const upload = multer({ storage: storage })
 app.use(cors(corsOptions))
 // ---------------------------------
 // Set up Upload API -- Post
